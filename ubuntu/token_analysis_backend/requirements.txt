@@ -1,0 +1,7 @@
+  fastapi
+  uvicorn
+  pydantic
+  llama-index
+  openai
+  python-multipart
+  python-dotenv
