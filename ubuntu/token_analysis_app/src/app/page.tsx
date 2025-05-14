@@ -78,11 +78,17 @@ export default function HomePage() {
       clearInterval(progressInterval);
       setProgress(100);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        // If response is not JSON, get text for debugging
+        const text = await response.text();
+        throw new Error(`v2: Unexpected response: ${text || response.statusText}`);
       }
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.detail ? `v2: ${data.detail}` : `v2: HTTP error! status: ${response.status}`);
+      }
       setAnalysisResult(data);
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");
