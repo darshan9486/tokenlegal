@@ -1,0 +1,845 @@
+Extraction Schema for Token Analysis
+
+This document outlines the structured schema for extracting information related to
+regulatory, legal, operational, governance, and insurance factors for various crypto
+token    types. This schema is intended to be used with tools like LlamaExtract (potentially
+as  a Pydantic model) to guide the information extraction process from source
+documents (e.g., whitepapers, legal terms, audit reports).
+
+Each extracted piece of information should ideally be accompanied by a reference to its
+source within the analyzed document(s) (e.g., page number, section heading, URL if
+applicable).
+
+General Structure for Each Token
+
+{
+
+"token_name": "string (Name of the token, e.g., USDC, wBTC, Lido Staked ETH)",
+"token_type_identified": "string (e.g., Stablecoin - RWA Backed, Stablecoin -
+Active Strategy, Custodian/Wrapped Token, Liquid Staking Token)",
+"source_documents_analyzed": [
+
+{
+
+"document_name_or_url": "string",
+
+"document_type": "string (e.g., Whitepaper, Terms of Service, Audit Report,
+Webpage)"
+
+}
+
+],
+
+"extraction_summary": {
+
+"overall_confidence": "string (e.g., High, Medium, Low - based on information
+availability)",
+
+"key_findings_or_gaps": "string (Brief summary of significant findings or
+information gaps)"
+
+},
+
+"factors": {
+
+// Sections for Regulatory, Legal, Operational, Governance, Insurance factors will
+follow
+
+}
+
+}
+
+I. Stablecoin Factors
+
+This section applies to tokens identified as Stablecoins. Sub-categories like RWA Backed,
+Active Strategy, or Alternative Asset Backed will influence the relevance and specifics of
+some factors.
+
+
+A. Regulatory Factors (Stablecoins)
+
+"regulatory_factors": {
+"licensing_and_registration": {
+"issuer_licenses_obtained": [
+
+{
+
+"license_name":
+
+"string (e.g., BitLicense, Money Transmitter License, Bermuda DABA Class F)",
+
+"issuing_authority": "string (e.g., NYDFS, FinCEN, Bermuda Monetary
+Authority)",
+
+"jurisdiction": "string (e.g., New York, USA; Federal, USA; Bermuda)",
+
+"status": "string (e.g., Active, Pending, Not Applicable)",
+
+"notes": "string (Any relevant details, effective dates, limitations)"
+
+}
+
+],
+
+"regulatory_oversight_level": {
+
+"classification": "string (e.g., State-Chartered Trust, Federally Chartered Trust,
+International Equivalents - Tier 1-4, VASP)",
+
+"primary_regulator": "string (Name of the primary regulatory body)",
+
+"primary_jurisdiction": "string (e.g., United States, Bermuda, Hong Kong SAR,
+Switzerland, UAE)",
+
+"notes": "string"
+
+},
+
+"compliance_with_specific_regulations": {
+
+"sec_registration_status":
+
+"string (e.g., Registered, Exempt - e.g., Regulation D, Not Registered, Not
+Applicable)",
+
+"fincen_msb_registration": "string (e.g., Registered, Not Registered, Not
+Applicable)",
+
+"other_relevant_compliances": "string (e.g., Travel Rule compliance, FATF
+recommendations adherence)",
+
+"notes": "string"
+
+},
+
+"clarity_of_regulatory_treatment_for_strategy": {
+
+"assessment": "string (Applicable for Active Strategy/Alternative Asset; e.g.,
+Clear, Ambiguous, Under Scrutiny)",
+
+"jurisdictional_variations": "string (Notes on how different jurisdictions view
+the specific stablecoin strategy)",
+
+"notes": "string"
+
+}
+
+}
+
+B. Legal Factors (Stablecoins)
+
+"legal_factors": {
+
+"issuer_legal_structure": {
+
+"entity_type": "string (e.g., Trust, Fiduciary, Corporation, Foundation)",
+"jurisdiction_of_incorporation": "string",
+"bankruptcy_remoteness": {
+
+
+  "assessment": "string (e.g., Strong, Moderate, Weak, Not Clear - based on 
+structure and legal opinions)",
+
+"supporting_mechanisms": "string (e.g., Trust structure, specific legal
+provisions)",
+
+"notes": "string"
+
+},
+
+"notes": "string"
+
+},
+
+"user_rights_and_terms_of_service": {
+
+"clarity_of_terms": "string (e.g., Clear and Unambiguous, Moderately Clear,
+Ambiguous)",
+
+"redemption_rights": {
+
+"direct_redemption_for_users": "boolean",
+
+"conditions_or_limitations": "string (e.g., Minimum redemption amount, KYC
+requirements, geographical restrictions)",
+
+"process_clarity": "string"
+
+},
+
+"claim_on_reserves": {
+
+"nature_of_claim": "string (e.g., Direct claim, Beneficial interest, Unsecured
+creditor)",
+
+"enforceability": "string (e.g., Clearly enforceable, Subject to conditions,
+Unclear)"
+
+},
+
+"governing_law_of_terms": "string ( Jurisdiction)",
+
+"notes": "string"
+
+},
+
+"counterparty_risk_legal_agreements": {
+
+"assessment": "string (Applicable for Active Strategy; e.g., Robust agreements,
+Standard agreements, Potential weaknesses)",
+
+"enforceability_of_claims": "string (Against counterparties in the strategy)",
+
+"notes": "string"
+
+},
+
+"perfection_of_security_interests_in_collateral": {
+
+"assessment": "string (Applicable for Alternative Asset Backed; e.g., Clearly
+perfected, Process unclear, Potential risks)",
+
+"legal_mechanisms": "string (How security interests are established and
+maintained)",
+
+"notes": "string"
+
+}
+
+}
+
+C. Operational Factors (Stablecoins)
+
+"operational_factors": {
+
+"reserves_management": {
+
+"operational_history_years": "integer | string (Issuer/Manager's years of
+operation)",
+
+"transparency_of_reserves": {
+
+"attestation_frequency": "string (e.g., Daily, Monthly, Quarterly, Ad-hoc,
+None)",
+
+
+"auditor_name": "string (Name of the auditing firm, if applicable)",
+
+"audit_report_accessibility": "string (e.g., Publicly available, Available on
+request, Not available)",
+
+"real_time_monitoring_availability": "boolean"
+
+},
+
+"quality_and_liquidity_of_reserve_assets": {
+
+"asset_composition_breakdown": "string (e.g., % Cash, % US Treasuries, %
+Commercial Paper, % Other)",
+
+"credit_quality_of_assets": "string (e.g., Predominantly AAA/AA, Investment
+Grade, Mixed, Unrated)",
+
+"liquidity_profile": "string (e.g., Highly liquid, Moderately liquid, Potential
+liquidity issues)"
+
+},
+
+"notes": "string"
+
+},
+
+"redemption_mechanism": {
+
+"efficiency":
+
+"string (e.g., Typically processed within X hours/days, Known delays, Unclear)",
+
+"reliability": "string (e.g., Consistently reliable, Occasional issues reported,
+Unproven)",
+
+"associated_fees": "string (Description of redemption fees, if any)",
+
+"notes": "string"
+
+},
+
+"third_party_custodians_for_reserves": [
+
+{
+
+"custodian_name": "string",
+
+"assets_custodied": "string (Description of assets they hold)",
+
+"regulatory_status_of_custodian": "string",
+
+"assessed_quality_or_rating": "string (e.g., S&P Rating, Internal Assessment)",
+
+"notes": "string"
+
+}
+
+],
+
+"strategy_execution_and_risk_management": {
+
+"description": "string (Applicable for Active Strategy; robustness of systems,
+rebalancing, collateral management)",
+
+"oracle_dependencies": {
+
+"usage": "string (Which oracles are used and for what purpose)",
+
+"reliability_and_security_assessment": "string (e.g., Reputable providers,
+Decentralized, Potential risks identified)"
+
+},
+
+"notes": "string"
+
+},
+
+"volatility_and_liquidity_management_of_collateral": {
+
+"description": "string (Applicable for Alternative Asset Backed; procedures for
+managing price volatility and market liquidity)",
+
+"notes": "string"
+
+},
+
+"custody_of_alternative_asset_collateral": {
+
+"method": "string (Applicable for Alternative Asset Backed; e.g., Self-custody,
+Third-party custodian, Smart contract)",
+
+"security_measures": "string",
+
+"notes": "string"
+
+
+ },
+
+"cross_chain_risks_for_collateral": {
+
+"assessment": "string (Applicable if collateral is on different chains; e.g., Bridge
+security, Interoperability risks)",
+
+"mitigation_measures": "string",
+
+"notes": "string"
+
+}
+
+}
+
+D. Governance Factors (Stablecoins)
+
+"governance_factors": {
+
+"issuer_or_strategy_governance_structure": {
+
+"entity_type": "string (e.g., Centralized Company, DAO, Foundation Committee)",
+
+"decision_making_process": "string (Description of how key decisions are
+made)",
+
+"key_personnel_or_entities": "string (Identified individuals, roles, or entities
+with significant control)",
+
+"transparency_of_governance": "string (e.g., Public meeting minutes, Voting
+records, Opaque)",
+
+"notes": "string"
+
+},
+
+"smart_contract_governance": {
+
+"upgradeability_mechanism": "string (e.g., Admin key, Multi-sig, Timelock, DAO
+vote, Immutable)",
+
+"control_distribution":
+
+"string (Who holds the keys/power to upgrade or change parameters)",
+
+"security_protocols_for_changes": "string (e.g., Audits before upgrade, Bug
+bounty programs)",
+
+"notes": "string"
+
+},
+
+"collateral_management_governance": {
+
+"decision_makers": "string (Applicable for Alternative Asset Backed; who
+decides on collateral types, liquidation parameters)",
+
+"process_description": "string",
+
+"notes": "string"
+
+},
+
+"strategy_parameter_control": {
+
+"controlling_entity": "string (Applicable for Active Strategy; who controls
+parameters of the active strategy)",
+
+"update_process": "string",
+
+"emergency_protocols": "string (e.g., Emergency shutdown, Pause
+functionality)",
+
+"notes": "string"
+
+}
+
+}
+
+
+E. Insurance Factors (Stablecoins)
+
+"insurance_factors": {
+"insurance_on_reserve_assets": {
+"is_insured": "boolean",
+
+"coverage_type": "string (e.g., FDIC for cash, Private crime/specie insurance for
+other assets)",
+
+"insurer_name": "string",
+
+"coverage_amount_or_limits": "string",
+
+"beneficiary": "string (e.g., The Trust, The Issuer, Token Holders directly)",
+
+"exclusions_or_limitations": "string",
+
+"notes": "string"
+
+},
+
+"insurance_for_strategy_specific_risks": {
+
+"is_insured": "boolean (Applicable for Active Strategy/Alternative Assets)",
+
+"risks_covered": "string (e.g., Smart contract exploits, Counterparty default,
+Oracle failure)",
+
+"coverage_details": "string",
+
+"notes": "string (Likely rare or highly specialized)"
+
+}
+
+}
+
+II. Custodian / Wrapped Token Factors
+
+This section applies to entities providing custody services or issuing wrapped tokens.
+
+A. Regulatory Factors (Custodian/Wrapped)
+
+"regulatory_factors": {
+"custody_licensing": {
+"licenses_obtained": [
+
+{
+
+"license_name": "string (e.g., Trust Charter, VASP with custody permission,
+State MTL with custody provisions)",
+
+"issuing_authority": "string (e.g., NYDFS, OCC, FinCEN, State banking
+regulator)",
+
+"jurisdiction": "string",
+
+"status": "string",
+
+"notes": "string"
+
+}
+
+],
+
+"notes": "string"
+
+},
+
+"aml_cft_compliance": {
+
+"program_robustness_assessment": "string (e.g., Based on public information,
+audits - Strong, Adequate, Needs Improvement, Unclear)",
+
+
+  "key_compliance_features": "string (e.g., Transaction monitoring, KYC/CDD 
+procedures, SAR filing)",
+
+"notes": "string"
+
+}
+
+}
+
+B. Legal Factors (Custodian/Wrapped)
+
+"legal_factors": {
+
+"legal_status_of_custodied_assets": {
+
+"holding_structure": "string (e.g., In Trust, Bailment, Segregated accounts,
+Omnibus account)",
+
+"bankruptcy_remoteness_for_custodied_assets": {
+
+"assessment": "string (e.g., Strong protections, Moderate, Unclear, Dependent
+on jurisdiction)",
+
+"legal_basis": "string (e.g., Trust law, Specific contractual provisions, Statutory
+protections)"
+
+},
+
+"notes": "string"
+
+},
+
+"terms_of_custody_agreement_or_wrapping_service": {
+
+"clarity_of_terms": "string",
+
+"liability_of_custodian": "string (e.g., For negligence, For loss of keys,
+Limitations of liability)",
+
+"user_rights_to_underlying_assets": "string (e.g., Direct claim, Entitlement
+through custodian)",
+
+"governing_law": "string",
+
+"notes": "string"
+
+}
+
+}
+
+C. Operational Factors (Custodian/Wrapped)
+
+"operational_factors": {
+
+"security_of_custody_technology": {
+
+"key_management_technology": "string (e.g., MPC, HSMs, Cold storage, Multi-
+sig)",
+
+"security_audits_and_certifications": [
+
+{
+
+"audit_type_or_certification": "string (e.g., SOC 2 Type II, ISO 27001,
+Penetration Test)",
+
+"auditor_name": "string",
+"date_or_frequency": "string",
+"summary_of_findings":   "string (If available)"
+
+}
+
+],
+
+"physical_security_measures": "string (If applicable and known)",
+
+"notes": "string"
+
+
+ },
+
+"minting_and_burning_process_wrapped_tokens": {
+
+"process_description": "string (How wrapped tokens are created and redeemed
+for underlying)",
+
+"security_measures":
+
+"string (e.g., Multi-sig controls, Audit trails, Segregation of duties)",
+
+"reliability_and_efficiency": "string",
+
+"transparency_of_backing": "string (e.g., Proof of reserves, On-chain
+verification)",
+
+"notes": "string"
+
+},
+
+"operational_resilience": {
+"business_continuity_plan_summary": "string (If available)",
+"disaster_recovery_capabilities": "string (If available)",
+"incident_response_plan_summary": "string (If available)",
+"notes":           "string"
+
+}
+
+}
+
+D. Governance Factors (Custodian/Wrapped)
+
+"governance_factors": {
+"corporate_governance_of_custodian": {
+"management_team_experience_and_reputation": "string",
+"board_structure_and_oversight":      "string (If applicable)",
+
+"ownership_structure": "string (e.g., Publicly traded, Privately held, VC-backed)",
+
+"transparency_of_corporate_governance": "string",
+
+"notes": "string"
+
+},
+
+"control_over_custody_operations": {
+
+"internal_controls_description": "string (e.g., Dual controls, Segregation of
+duties, Access controls)",
+
+"approval_processes_for_asset_movement": "string",
+
+"notes": "string"
+
+}
+
+}
+
+E. Insurance Factors (Custodian/Wrapped)
+
+"insurance_factors": {
+"custody_insurance_specie_insurance": {
+"is_insured":            "boolean",
+
+"coverage_type": "string (e.g., Crime, Specie, Cyber, Professional Indemnity)",
+
+"insurer_name_or_panel": "string",
+
+"coverage_amount_or_limits": "string (Per incident, Aggregate)",
+"scope_of_coverage": "string (e.g., Hot storage, Cold storage, Transit)",
+"key_exclusions": "string",
+
+"beneficiary": "string (e.g., Custodian, Custodian's clients)",
+
+
+  "notes": "string"
+
+}
+
+}
+
+III. Liquid Staking Token (LST) Factors
+
+This section applies to tokens representing staked assets.
+
+A. Regulatory Factors (LSTs)
+
+"regulatory_factors": {
+"regulatory_classification_of_lst": {
+"assessment_in_key_jurisdictions":
+
+"string (e.g., Potential security, Utility token, Unclear, Commodity)",
+"relevant_regulatory_statements_or_guidance": "string",
+"notes": "string"
+
+},
+
+"staking_provider_or_node_operator_regulation": {
+
+"regulatory_requirements_for_providers": "string (Are the underlying staking
+providers subject to specific regulations?)",
+
+"compliance_status_of_providers": "string (If known)",
+
+"notes": "string"
+
+}
+
+}
+
+B. Legal Factors (LSTs)
+
+"legal_factors": {
+
+"legal_relationship_with_staked_assets": {
+
+"nature_of_lst_holder_claim": "string (e.g., Direct claim on underlying, Claim
+against protocol, Beneficial interest)",
+
+"enforceability_of_claim": "string",
+
+"notes": "string"
+
+},
+
+"terms_of_service_of_lst_protocol": {
+"clarity_of_terms": "string",
+"rights_and_responsibilities_of_lst_holders": "string",
+"protocol_operator_dao_liability": "string",
+"governing_law":         "string",
+
+"notes": "string"
+
+}
+
+}
+
+
+C. Operational Factors (LSTs)
+
+"operational_factors": {
+"smart_contract_security": {
+"audit_reports": [
+
+{
+
+"auditor_name": "string",
+
+"date_of_audit": "string",
+"key_findings_or_vulnerabilities": "string",
+"remediation_status": "string",
+"report_url":       "string (If public)"
+
+}
+
+],
+
+"bug_bounty_program_details": "string (e.g., Active, Platform used, Max
+payout)",
+
+"formal_verification_status": "string (e.g., Applied to critical contracts, Not
+applied, In progress)",
+
+"incident_history": "string (Details of any past security incidents)",
+
+"notes": "string"
+
+},
+
+"validator_performance_and_slashing_risk": {
+
+"validator_selection_process": "string (How validators are chosen and vetted)",
+"performance_monitoring_mechanisms": "string",
+"slashing_mitigation_strategies": "string (e.g., Diversification, Monitoring,
+
+Slashing insurance/coverage fund)",
+
+"historical_slashing_incidents": "string (Number and impact of past incidents)",
+
+"notes": "string"
+
+},
+
+"oracle_data_feed_dependency": {
+
+"usage_of_oracles": "string (e.g., For reward calculation, Pricing, Staking ratios)",
+
+"oracle_providers_used": "string",
+"reliability_and_security_assessment": "string",
+"notes":              "string"
+
+},
+
+"withdrawal_unstaking_process": {
+
+"mechanism_description": "string (e.g., Direct unstaking, Liquidity pool swap,
+Queue system)",
+
+"efficiency_and_timeliness": "string (e.g., Expected duration, Known delays or
+bottlenecks)",
+
+"associated_fees_or_penalties": "string",
+
+"lock_up_periods": "string",
+
+"notes": "string"
+
+}
+
+}
+
+D. Governance Factors (LSTs)
+
+"governance_factors": {
+
+"protocol_governance_dao_structure": {
+
+
+  "governance_token_details": "string (Name, Distribution, Utility)",
+
+"voting_mechanism": "string (e.g., On-chain, Off-chain snapshot, Weighted
+voting)",
+
+"participation_levels": "string (e.g., Active, Low, Dominated by few holders)",
+"transparency_of_proposals_and_voting": "string",
+"key_parameters_controlled_by_governance":
+
+"string (e.g., Fees, Validator sets, Upgrades, Treasury)",
+
+"notes": "string"
+
+},
+
+"upgradeability_of_contracts": {
+
+"upgrade_mechanism": "string (e.g., Admin key, Multi-sig, Timelock with DAO
+vote, Proxy pattern)",
+
+"control_over_upgrades": "string (Who can initiate and approve upgrades)",
+
+"security_measures_for_upgrades": "string (e.g., Audits, Timelocks, Community
+review period)",
+
+"notes": "string"
+
+}
+
+}
+
+E. Insurance Factors (LSTs)
+
+"insurance_factors": {
+"slashing_insurance_or_coverage": {
+"is_covered": "boolean",
+
+"coverage_provider_or_mechanism": "string (e.g., Nexus Mutual, Protocol
+treasury fund, Third-party insurer)",
+
+"coverage_amount_or_limits": "string",
+
+"scope_of_coverage": "string (Which validators, types of slashing events)",
+
+"claim_process": "string",
+
+"notes": "string"
+
+},
+
+"smart_contract_exploit_insurance": {
+"is_covered": "boolean",
+"coverage_provider":
+
+"string (e.g., Nexus Mutual, Sherlock, Other DeFi insurance protocols)",
+
+"coverage_amount_or_limits": "string",
+
+"scope_of_coverage": "string (Which contracts, types of exploits)",
+
+"claim_process": "string",
+
+"notes": "string"
+
+}
+
+}
+
+This schema provides a comprehensive starting point. It will likely be refined during the
+PoC implementation, especially when translating it into a Pydantic model for
+LlamaExtract, to ensure it's both practical for extraction and meets the detailed analysis
+needs.
+
