@@ -79,19 +79,26 @@ export default function HomePage() {
       setProgress(100);
 
       let data;
+      let rawText;
       try {
-        data = await response.json();
-      } catch (e) {
-        // If response is not JSON, get text for debugging
-        const text = await response.text();
-        throw new Error(`v2: Unexpected response: ${text || response.statusText}`);
+        rawText = await response.text();
+        try {
+          data = JSON.parse(rawText);
+        } catch (e) {
+          throw new Error(`v2: Unexpected response: ${rawText || response.statusText}`);
+        }
+        if (!response.ok) {
+          throw new Error(data?.detail ? `v2: ${data.detail}` : `v2: HTTP error! status: ${response.status}`);
+        }
+        setAnalysisResult(data);
+      } catch (err: any) {
+        setError(err.message || "v2: An unexpected error occurred.");
+      } finally {
+        setIsLoading(false);
+        setProgress(0); // Reset progress bar
       }
-      if (!response.ok) {
-        throw new Error(data?.detail ? `v2: ${data.detail}` : `v2: HTTP error! status: ${response.status}`);
-      }
-      setAnalysisResult(data);
     } catch (err: any) {
-      setError(err.message || "An unexpected error occurred.");
+      setError(err.message || "v2: An unexpected error occurred.");
     } finally {
       setIsLoading(false);
       setProgress(0); // Reset progress bar
