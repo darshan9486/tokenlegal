@@ -1042,3 +1042,208 @@ General Structure for Each Token
 2025-05-14 10:04:03,136 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
 2025-05-14 10:04:03,137 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
 2025-05-14 10:04:03,139 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:18:22,931 - INFO - Received analysis request: token_name=Ethena, files_present=True, url_present=False
+2025-05-14 11:18:22,934 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:18:22,935 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:18:22,935 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:18:22,936 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:18:22,952 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:18:22,952 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:18:22,953 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:18:22,953 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:18:23,019 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:18:23,569 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:18:23,652 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:18:23,932 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:18:25,343 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:18:25,431 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:18:25,521 - INFO - Loaded 38 documents in total.
+2025-05-14 11:18:25,521 - INFO - Starting iterative extraction process.
+2025-05-14 11:18:25,523 - INFO - Preparing to extract RegulatoryFactors
+2025-05-14 11:18:25,523 - INFO - Running extraction for factor: RegulatoryFactors
+2025-05-14 11:18:30,450 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:18:30,463 - INFO - Successfully extracted data for RegulatoryFactors.
+2025-05-14 11:18:30,463 - INFO - Preparing to extract LegalFactors
+2025-05-14 11:18:30,464 - INFO - Running extraction for factor: LegalFactors
+2025-05-14 11:18:43,791 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:18:43,806 - INFO - Successfully extracted data for LegalFactors.
+2025-05-14 11:18:43,806 - INFO - Preparing to extract OperationalFactors
+2025-05-14 11:18:43,807 - INFO - Running extraction for factor: OperationalFactors
+2025-05-14 11:19:02,908 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:19:02,921 - INFO - Successfully extracted data for OperationalFactors.
+2025-05-14 11:19:02,922 - INFO - Preparing to extract GovernanceFactors
+2025-05-14 11:19:02,923 - INFO - Running extraction for factor: GovernanceFactors
+2025-05-14 11:19:13,797 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:19:13,817 - INFO - Successfully extracted data for GovernanceFactors.
+2025-05-14 11:19:13,817 - INFO - Preparing to extract InsuranceFactors
+2025-05-14 11:19:13,819 - INFO - Running extraction for factor: InsuranceFactors
+2025-05-14 11:19:22,533 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:19:22,548 - INFO - Successfully extracted data for InsuranceFactors.
+2025-05-14 11:19:22,548 - INFO - Iterative extraction process completed.
+2025-05-14 11:19:22,548 - INFO - Iterative extraction completed successfully.
+2025-05-14 11:19:22,549 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:19:22,550 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:19:22,550 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:19:22,550 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:19:22,551 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:19:22,551 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:19:22,552 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:20:00,409 - INFO - Received analysis request: token_name=Ethena, files_present=True, url_present=False
+2025-05-14 11:20:00,411 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:20:00,412 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:20:00,413 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:20:00,414 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:20:00,430 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:20:00,434 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:20:00,438 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:20:00,438 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:20:00,478 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:20:00,766 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:20:00,848 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:20:01,056 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:20:02,408 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:20:02,494 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:20:02,579 - INFO - Loaded 38 documents in total.
+2025-05-14 11:20:02,580 - INFO - Starting iterative extraction process.
+2025-05-14 11:20:02,580 - INFO - Preparing to extract RegulatoryFactors
+2025-05-14 11:20:02,580 - INFO - Running extraction for factor: RegulatoryFactors
+2025-05-14 11:20:05,051 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:20:05,054 - INFO - Successfully extracted data for RegulatoryFactors.
+2025-05-14 11:20:05,055 - INFO - Preparing to extract LegalFactors
+2025-05-14 11:20:05,055 - INFO - Running extraction for factor: LegalFactors
+2025-05-14 11:20:24,378 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:20:24,406 - INFO - Successfully extracted data for LegalFactors.
+2025-05-14 11:20:24,406 - INFO - Preparing to extract OperationalFactors
+2025-05-14 11:20:24,407 - INFO - Running extraction for factor: OperationalFactors
+2025-05-14 11:20:45,906 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:20:45,931 - INFO - Successfully extracted data for OperationalFactors.
+2025-05-14 11:20:45,932 - INFO - Preparing to extract GovernanceFactors
+2025-05-14 11:20:45,932 - INFO - Running extraction for factor: GovernanceFactors
+2025-05-14 11:20:57,542 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:20:57,575 - INFO - Successfully extracted data for GovernanceFactors.
+2025-05-14 11:20:57,576 - INFO - Preparing to extract InsuranceFactors
+2025-05-14 11:20:57,582 - INFO - Running extraction for factor: InsuranceFactors
+2025-05-14 11:21:07,902 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:21:07,913 - INFO - Successfully extracted data for InsuranceFactors.
+2025-05-14 11:21:07,914 - INFO - Iterative extraction process completed.
+2025-05-14 11:21:07,914 - INFO - Iterative extraction completed successfully.
+2025-05-14 11:21:07,915 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:21:07,916 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:21:07,916 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:21:07,917 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:21:07,917 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:21:07,917 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:21:07,918 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:21:14,251 - INFO - Received analysis request: token_name=, files_present=True, url_present=False
+2025-05-14 11:21:14,252 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:21:14,253 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:21:14,253 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:21:14,253 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:21:14,271 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:21:14,272 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:21:14,272 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:21:14,272 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:21:14,304 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:21:14,687 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:21:14,786 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:21:14,989 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:21:16,374 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:21:16,461 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:21:16,548 - INFO - Loaded 38 documents in total.
+2025-05-14 11:21:16,548 - INFO - Starting iterative extraction process.
+2025-05-14 11:21:16,549 - INFO - Preparing to extract RegulatoryFactors
+2025-05-14 11:21:16,549 - INFO - Running extraction for factor: RegulatoryFactors
+2025-05-14 11:21:18,479 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:21:18,486 - INFO - Successfully extracted data for RegulatoryFactors.
+2025-05-14 11:21:18,488 - INFO - Preparing to extract LegalFactors
+2025-05-14 11:21:18,488 - INFO - Running extraction for factor: LegalFactors
+2025-05-14 11:21:30,725 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 502 Bad Gateway"
+2025-05-14 11:21:30,732 - INFO - Retrying request to /chat/completions in 0.385147 seconds
+2025-05-14 11:21:48,702 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:21:48,717 - INFO - Successfully extracted data for LegalFactors.
+2025-05-14 11:21:48,718 - INFO - Preparing to extract OperationalFactors
+2025-05-14 11:21:48,719 - INFO - Running extraction for factor: OperationalFactors
+2025-05-14 11:22:06,495 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:22:06,517 - INFO - Successfully extracted data for OperationalFactors.
+2025-05-14 11:22:06,517 - INFO - Preparing to extract GovernanceFactors
+2025-05-14 11:22:06,518 - INFO - Running extraction for factor: GovernanceFactors
+2025-05-14 11:22:22,632 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:22:22,664 - INFO - Successfully extracted data for GovernanceFactors.
+2025-05-14 11:22:22,664 - INFO - Preparing to extract InsuranceFactors
+2025-05-14 11:22:22,665 - INFO - Running extraction for factor: InsuranceFactors
+2025-05-14 11:22:29,210 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:22:29,227 - INFO - Successfully extracted data for InsuranceFactors.
+2025-05-14 11:22:29,228 - INFO - Iterative extraction process completed.
+2025-05-14 11:22:29,228 - INFO - Iterative extraction completed successfully.
+2025-05-14 11:22:29,229 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:22:29,229 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:22:29,229 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:22:29,229 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:22:29,229 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:22:29,230 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:22:29,230 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:22:29,282 - INFO - Received analysis request: token_name=Ethena, files_present=True, url_present=False
+2025-05-14 11:22:29,283 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:22:29,283 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:22:29,283 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:22:29,284 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:22:29,297 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:22:29,300 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:22:29,300 - INFO - File saved to /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:22:29,301 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:22:29,328 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:22:29,633 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:22:29,715 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:22:29,898 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:22:31,240 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:22:31,326 - INFO - Loading document from file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf
+2025-05-14 11:22:31,520 - INFO - Loaded 38 documents in total.
+2025-05-14 11:22:31,520 - INFO - Starting iterative extraction process.
+2025-05-14 11:22:31,521 - INFO - Preparing to extract RegulatoryFactors
+2025-05-14 11:22:31,521 - INFO - Running extraction for factor: RegulatoryFactors
+2025-05-14 11:22:33,447 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:22:33,457 - INFO - Successfully extracted data for RegulatoryFactors.
+2025-05-14 11:22:33,458 - INFO - Preparing to extract LegalFactors
+2025-05-14 11:22:33,459 - INFO - Running extraction for factor: LegalFactors
+2025-05-14 11:22:47,546 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:22:47,550 - INFO - Successfully extracted data for LegalFactors.
+2025-05-14 11:22:47,550 - INFO - Preparing to extract OperationalFactors
+2025-05-14 11:22:47,550 - INFO - Running extraction for factor: OperationalFactors
+2025-05-14 11:24:54,275 - INFO - Retrying request to /chat/completions in 0.400680 seconds
+2025-05-14 11:24:54,712 - INFO - Retrying request to /chat/completions in 0.915147 seconds
+2025-05-14 11:24:55,643 - INFO - Retrying request to /chat/completions in 1.656512 seconds
+2025-05-14 11:24:57,323 - ERROR - Error during extraction for OperationalFactors: Connection error.
+2025-05-14 11:24:57,323 - WARNING - No data extracted for OperationalFactors
+2025-05-14 11:24:57,323 - INFO - Preparing to extract GovernanceFactors
+2025-05-14 11:24:57,325 - INFO - Running extraction for factor: GovernanceFactors
+2025-05-14 11:24:57,345 - INFO - Retrying request to /chat/completions in 0.478128 seconds
+2025-05-14 11:40:20,979 - INFO - Retrying request to /chat/completions in 0.951928 seconds
+2025-05-14 11:40:21,948 - INFO - Retrying request to /chat/completions in 1.612455 seconds
+2025-05-14 11:40:23,572 - WARNING - Retrying llama_index.llms.openai.base.OpenAI._chat in 1.0 seconds as it raised APIConnectionError: Connection error..
+2025-05-14 11:40:24,589 - INFO - Retrying request to /chat/completions in 0.398226 seconds
+2025-05-14 11:40:24,993 - INFO - Retrying request to /chat/completions in 0.754170 seconds
+2025-05-14 11:40:25,757 - INFO - Retrying request to /chat/completions in 1.537599 seconds
+2025-05-14 11:52:20,344 - WARNING - Retrying llama_index.llms.openai.base.OpenAI._chat in 1.7451716084324072 seconds as it raised APIConnectionError: Connection error..
+2025-05-14 11:52:22,112 - INFO - Retrying request to /chat/completions in 0.426889 seconds
+2025-05-14 11:52:22,554 - INFO - Retrying request to /chat/completions in 0.861128 seconds
+2025-05-14 11:52:23,433 - INFO - Retrying request to /chat/completions in 1.683943 seconds
+2025-05-14 11:52:25,143 - ERROR - Error during extraction for GovernanceFactors: Connection error.
+2025-05-14 11:52:25,144 - WARNING - No data extracted for GovernanceFactors
+2025-05-14 11:52:25,144 - INFO - Preparing to extract InsuranceFactors
+2025-05-14 11:52:25,148 - INFO - Running extraction for factor: InsuranceFactors
+2025-05-14 11:52:25,168 - INFO - Retrying request to /chat/completions in 0.473901 seconds
+2025-05-14 11:52:25,689 - INFO - Retrying request to /chat/completions in 0.805841 seconds
+2025-05-14 11:52:26,576 - INFO - Retrying request to /chat/completions in 1.585844 seconds
+2025-05-14 11:52:28,200 - WARNING - Retrying llama_index.llms.openai.base.OpenAI._chat in 1.0 seconds as it raised APIConnectionError: Connection error..
+2025-05-14 11:52:30,157 - INFO - Retrying request to /chat/completions in 0.485470 seconds
+2025-05-14 11:52:41,486 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-14 11:52:41,557 - INFO - Successfully extracted data for InsuranceFactors.
+2025-05-14 11:52:41,563 - INFO - Iterative extraction process completed.
+2025-05-14 11:52:41,564 - INFO - Iterative extraction completed successfully.
+2025-05-14 11:52:41,564 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodian track record.pdf
+2025-05-14 11:52:41,565 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena backing custody.pdf
+2025-05-14 11:52:41,566 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Custodial Risk.pdf
+2025-05-14 11:52:41,567 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs Governance.pdf
+2025-05-14 11:52:41,568 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Insurance Fund Analysis.pdf
+2025-05-14 11:52:41,569 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf
+2025-05-14 11:52:41,569 - INFO - Cleaned up uploaded file: /Users/darshanvaidya/Documents/tokenlegal/ubuntu/token_analysis_backend/upload_temp/Ethena Labs.pdf Token Overview.pdf

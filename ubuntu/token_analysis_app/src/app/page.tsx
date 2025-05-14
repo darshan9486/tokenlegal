@@ -70,7 +70,7 @@ export default function HomePage() {
         }
       }, 200);
 
-      const response = await fetch("http://localhost:8000/analyze/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/analyze/`, {
         method: "POST",
         body: formData,
       });
