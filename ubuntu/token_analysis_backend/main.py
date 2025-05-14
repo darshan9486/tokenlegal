@@ -29,6 +29,7 @@ app = FastAPI()
 
 # CORS configuration
 origins = [
+    "https://tokenlegal.onrender.com/",
     "http://localhost",
     "http://localhost:3000", # Default Next.js dev port
     "http://localhost:3001", # Additional port for frontend
