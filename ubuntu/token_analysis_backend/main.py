@@ -53,7 +53,7 @@ job_status = {}
 @app.post("/analyze/")
 async def analyze_documents(
     files: Optional[List[UploadFile]] = File(None),
-    url: Optional[str] = Form(None),
+    urls: Optional[List[str]] = Form(None),
     token_name: Optional[str] = Form(None),
     token_symbol: Optional[str] = Form(None),
     token_type_methodology: Optional[str] = Form(None),
@@ -64,7 +64,7 @@ async def analyze_documents(
     job_status[job_id] = {"status": "Received", "details": "Starting analysis..."}
     background_tasks.add_task(
         process_documents_job,
-        files, url, token_name, token_symbol, token_type_methodology, additional_context, job_id
+        files, urls, token_name, token_symbol, token_type_methodology, additional_context, job_id
     )
     return {"job_id": job_id}
 
@@ -73,7 +73,7 @@ async def get_status(job_id: str):
     return job_status.get(job_id, {"status": "Unknown job_id"})
 
 # Helper to save uploaded files and process in background
-def process_documents_job(files, url, token_name, token_symbol, token_type_methodology, additional_context, job_id):
+def process_documents_job(files, urls, token_name, token_symbol, token_type_methodology, additional_context, job_id):
     try:
         job_status[job_id] = {"status": "Saving files", "details": "Saving uploaded files..."}
         file_paths = []
@@ -86,9 +86,10 @@ def process_documents_job(files, url, token_name, token_symbol, token_type_metho
                     shutil.copyfileobj(file.file, file_object)
                 file_paths.append(file_location)
                 processed_doc_sources.append({"name": file.filename, "type": "file"})
-        if url:
-            urls_to_process.append(url)
-            processed_doc_sources.append({"name": url, "type": "url"})
+        if urls:
+            urls_to_process.extend(urls)
+            for u in urls:
+                processed_doc_sources.append({"name": u, "type": "url"})
         job_status[job_id] = {"status": "Loading documents", "details": f"Loading {len(file_paths)} files and {len(urls_to_process)} URLs..."}
         documents = load_documents_from_sources(file_paths=file_paths, urls=urls_to_process if urls_to_process else None)
         if not documents:
