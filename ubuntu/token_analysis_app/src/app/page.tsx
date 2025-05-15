@@ -21,6 +21,9 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [viewMode, setViewMode] = useState<"json" | "table">("json"); // To toggle between JSON and Table
+  const [jobId, setJobId] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
+  const [statusDetails, setStatusDetails] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -43,12 +46,45 @@ export default function HomePage() {
     setFiles(files.filter(f => f.name !== fileName));
   };
 
+  useEffect(() => {
+    let pollInterval: NodeJS.Timeout;
+    if (jobId && isLoading) {
+      pollInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/status/${jobId}`);
+          const data = await res.json();
+          setStatus(data.status);
+          setStatusDetails(data.details);
+          if (data.status === "Complete") {
+            setAnalysisResult(data.result);
+            setIsLoading(false);
+            setJobId(null);
+          } else if (data.status === "Error") {
+            setError(data.details || "An error occurred during analysis.");
+            setIsLoading(false);
+            setJobId(null);
+          }
+        } catch (err) {
+          setError("Failed to fetch job status.");
+          setIsLoading(false);
+          setJobId(null);
+        }
+      }, 2000);
+    }
+    return () => {
+      if (pollInterval) clearInterval(pollInterval);
+    };
+  }, [jobId, isLoading]);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
     setProgress(0);
+    setStatus(null);
+    setStatusDetails(null);
+    setJobId(null);
 
     const formData = new FormData();
     files.forEach(file => formData.append("files", file));
@@ -59,49 +95,21 @@ export default function HomePage() {
     formData.append("additional_context", additionalContext);
 
     try {
-      // Simulate progress for the upload/processing
-      let currentProgress = 0;
-      const progressInterval = setInterval(() => {
-        currentProgress += 10;
-        if (currentProgress <= 100) {
-          setProgress(currentProgress);
-        } else {
-          clearInterval(progressInterval);
-        }
-      }, 200);
-
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/analyze/`, {
         method: "POST",
         body: formData,
       });
-
-      clearInterval(progressInterval);
-      setProgress(100);
-
-      let data;
-      let rawText;
-      try {
-        rawText = await response.text();
-        try {
-          data = JSON.parse(rawText);
-        } catch (e) {
-          throw new Error(`v2: Unexpected response: ${rawText || response.statusText}`);
-        }
-        if (!response.ok) {
-          throw new Error(data?.detail ? `v2: ${data.detail}` : `v2: HTTP error! status: ${response.status}`);
-        }
-        setAnalysisResult(data);
-      } catch (err: any) {
-        setError(err.message || "v2: An unexpected error occurred.");
-      } finally {
-        setIsLoading(false);
-        setProgress(0); // Reset progress bar
+      const data = await response.json();
+      if (data.job_id) {
+        setJobId(data.job_id);
+        setStatus("Submitted");
+        setStatusDetails("Job submitted, waiting for processing...");
+      } else {
+        throw new Error("No job_id returned from backend.");
       }
     } catch (err: any) {
       setError(err.message || "v2: An unexpected error occurred.");
-    } finally {
       setIsLoading(false);
-      setProgress(0); // Reset progress bar
     }
   };
 
@@ -226,6 +234,10 @@ export default function HomePage() {
       {isLoading && (
         <div className="w-full bg-gray-700 rounded-full h-2.5 mb-4">
           <Progress value={progress} className="h-2.5 rounded-full bg-purple-600" />
+          <div className="mt-2 text-sm text-gray-300">
+            <strong>Status:</strong> {status || "Processing..."}<br />
+            <span>{statusDetails}</span>
+          </div>
         </div>
       )}
 

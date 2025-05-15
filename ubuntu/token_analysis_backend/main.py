@@ -1,10 +1,12 @@
 import os
 import shutil
-from fastapi import FastAPI, File, UploadFile, Form, HTTPException
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, List
 import logging
 from dotenv import load_dotenv
+import uuid
+from fastapi.responses import JSONResponse
 
 # Use absolute import for script execution
 from extraction_processor import extract_token_information_iteratively, load_documents_from_sources, TokenAnalysisSchema
@@ -46,46 +48,53 @@ app.add_middleware(
 
 load_dotenv()
 
-@app.post("/analyze/", response_model=TokenAnalysisSchema)
+job_status = {}
+
+@app.post("/analyze/")
 async def analyze_documents(
     files: Optional[List[UploadFile]] = File(None),
     url: Optional[str] = Form(None),
     token_name: Optional[str] = Form(None),
     token_symbol: Optional[str] = Form(None),
     token_type_methodology: Optional[str] = Form(None),
-    additional_context: Optional[str] = Form(None)
+    additional_context: Optional[str] = Form(None),
+    background_tasks: BackgroundTasks = None
 ):
-    logger.info(f"Received analysis request: token_name={token_name}, files_present={bool(files)}, url_present={bool(url)}")
-    file_paths = []
-    urls_to_process = []
-    processed_doc_sources = []
+    job_id = str(uuid.uuid4())
+    job_status[job_id] = {"status": "Received", "details": "Starting analysis..."}
+    background_tasks.add_task(
+        process_documents_job,
+        files, url, token_name, token_symbol, token_type_methodology, additional_context, job_id
+    )
+    return {"job_id": job_id}
 
-    if not files and not url:
-        logger.error("No files or URL provided for analysis.")
-        raise HTTPException(status_code=400, detail="No files or URL provided.")
+@app.get("/status/{job_id}")
+async def get_status(job_id: str):
+    return job_status.get(job_id, {"status": "Unknown job_id"})
 
+# Helper to save uploaded files and process in background
+def process_documents_job(files, url, token_name, token_symbol, token_type_methodology, additional_context, job_id):
     try:
+        job_status[job_id] = {"status": "Saving files", "details": "Saving uploaded files..."}
+        file_paths = []
+        urls_to_process = []
+        processed_doc_sources = []
         if files:
             for file in files:
                 file_location = os.path.join(UPLOAD_DIRECTORY, file.filename)
                 with open(file_location, "wb+") as file_object:
                     shutil.copyfileobj(file.file, file_object)
                 file_paths.append(file_location)
-                logger.info(f"File saved to {file_location}")
                 processed_doc_sources.append({"name": file.filename, "type": "file"})
-
         if url:
             urls_to_process.append(url)
-            logger.info(f"URL received: {url}")
             processed_doc_sources.append({"name": url, "type": "url"})
-
+        job_status[job_id] = {"status": "Loading documents", "details": f"Loading {len(file_paths)} files and {len(urls_to_process)} URLs..."}
         documents = load_documents_from_sources(file_paths=file_paths, urls=urls_to_process if urls_to_process else None)
-        
         if not documents:
-            logger.error("No documents could be loaded from the provided sources.")
-            raise HTTPException(status_code=400, detail="Could not load documents from provided sources.")
-
-        logger.info("Starting iterative extraction process.")
+            job_status[job_id] = {"status": "Error", "details": "No documents could be loaded from the provided sources."}
+            return
+        job_status[job_id] = {"status": "Extracting", "details": "Extracting token information..."}
         analysis_result = extract_token_information_iteratively(
             documents=documents,
             token_name=token_name,
@@ -93,30 +102,13 @@ async def analyze_documents(
             token_type_methodology=token_type_methodology,
             additional_context=additional_context
         )
-        logger.info("Iterative extraction completed successfully.")
-        
-        # Clean up uploaded files if they exist
+        job_status[job_id] = {"status": "Complete", "details": "Extraction complete.", "result": analysis_result.model_dump()}
+        # Clean up uploaded files
         for file_path in file_paths:
             if os.path.exists(file_path):
                 os.remove(file_path)
-                logger.info(f"Cleaned up uploaded file: {file_path}")
-        
-        return analysis_result
-
-    except HTTPException as http_exc:
-        logger.error(f"HTTPException during analysis: {http_exc.detail}")
-        raise http_exc # Re-raise HTTPException
     except Exception as e:
-        logger.error(f"An unexpected error occurred during analysis: {str(e)}", exc_info=True)
-        # Clean up uploaded files in case of error
-        for file_path in file_paths:
-            if os.path.exists(file_path):
-                try:
-                    os.remove(file_path)
-                    logger.info(f"Cleaned up uploaded file after error: {file_path}")
-                except Exception as cleanup_e:
-                    logger.error(f"Error during cleanup of file {file_path}: {cleanup_e}")
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+        job_status[job_id] = {"status": "Error", "details": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
