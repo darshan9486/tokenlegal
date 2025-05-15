@@ -22,6 +22,47 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# --- Enhanced ExtractionAnswer and Reference for all fields ---
+class Reference(BaseModel):
+    filename: str
+    page: Optional[int] = None
+    line: Optional[int] = None
+    quote: Optional[str] = None
+
+class ExtractionAnswer(BaseModel):
+    answer: str
+    context: Optional[str] = None
+    quotes: Optional[List[str]] = None
+    references: Optional[List[Reference]] = None
+    agent_logic: Optional[str] = None
+    missing_info: Optional[str] = None
+
+class UserRightsQuestions(BaseModel):
+    redemption_rights: ExtractionAnswer
+    asset_segregation_issuer: ExtractionAnswer
+    beneficial_ownership: ExtractionAnswer
+
+class RegulatoryCoverQuestions(BaseModel):
+    licenses: ExtractionAnswer
+    licenses_relevant: ExtractionAnswer
+    legal_jurisdiction: ExtractionAnswer
+    asset_segregation_issuer: ExtractionAnswer
+    asset_segregation_custodian: ExtractionAnswer
+
+USER_RIGHTS_QUESTIONS = [
+    ("redemption_rights", "Based only on the terms of service/legals, does it explicitly state that the issued token can be redeemed in exchange for the underlying token through the issuer? If redemptions are possible, are there any restrictions?"),
+    ("asset_segregation_issuer", "Based only on the terms of service/legals or other materials provided, does it explicitly state that the underlying reserve assets are segregated from the operating entity?"),
+    ("beneficial_ownership", "Based only on the terms of service/legals, does it explicitly state that the token holders are the beneficial owners of the underlying reserve assets?")
+]
+
+REGULATORY_COVER_QUESTIONS = [
+    ("licenses", "What licenses and from what jurisdiction has the issuing entity obtained? Only include licenses related to the entity which issued the token. If other group entities have licenses, mention them but clarify they are not for the issuing entity. If the token is issued by multiple entities, include all. Highlight if licenses are not relevant. Include a short overview of each license and the issuing jurisdiction."),
+    ("licenses_relevant", "Out of the licenses identified above, which if any specifically relate to the issuance of the type of asset it is (e.g. stablecoin, wrapped token)? List and explain."),
+    ("legal_jurisdiction", "What is the legal jurisdiction of the token's issuing entity? If the issuer is DeFi native, note if there is no definitive jurisdiction."),
+    ("asset_segregation_issuer", "Is there asset segregation from the issuing entity and the reserves? If yes, explain and provide sources. Look for keywords like Trust, segregated accounts, etc. Note if NA for smart contract control."),
+    ("asset_segregation_custodian", "Is there asset segregation from the custodian and the reserves? If yes, explain and provide sources. Look for keywords like Trust, segregated accounts, etc. Note if NA for smart contract control.")
+]
+
 # --- Pydantic Schemas for Extraction (condensed for brevity, should match original intent) ---
 
 class BaseFactorDetail(BaseModel):
@@ -217,34 +258,6 @@ def load_documents_from_sources(file_paths: Optional[List[str]] = None, urls: Op
     logger.info(f"Loaded {len(documents)} documents in total.")
     return documents
 
-# --- Enhanced ExtractionAnswer and Reference for all fields ---
-class Reference(BaseModel):
-    filename: str
-    page: Optional[int] = None
-    line: Optional[int] = None
-    quote: Optional[str] = None
-
-class ExtractionAnswer(BaseModel):
-    answer: str
-    context: Optional[str] = None
-    quotes: Optional[List[str]] = None
-    references: Optional[List[Reference]] = None
-    agent_logic: Optional[str] = None
-    missing_info: Optional[str] = None
-
-# --- User Rights and Regulatory Cover Questions ---
-class UserRightsQuestions(BaseModel):
-    redemption_rights: ExtractionAnswer
-    asset_segregation_issuer: ExtractionAnswer
-    beneficial_ownership: ExtractionAnswer
-
-class RegulatoryCoverQuestions(BaseModel):
-    licenses: ExtractionAnswer
-    licenses_relevant: ExtractionAnswer
-    legal_jurisdiction: ExtractionAnswer
-    asset_segregation_issuer: ExtractionAnswer
-    asset_segregation_custodian: ExtractionAnswer
-
 # --- Enhanced Prompt Template ---
 PROMPT_TEMPLATE_BASE = """
 Given the following document context, extract the information relevant to the fields described below.
@@ -261,21 +274,6 @@ Context:
 
 Desired output format is a JSON object matching the Pydantic schema for {factor_name}.
 """
-
-# --- User Rights and Regulatory Cover Prompts ---
-USER_RIGHTS_QUESTIONS = [
-    ("redemption_rights", "Based only on the terms of service/legals, does it explicitly state that the issued token can be redeemed in exchange for the underlying token through the issuer? If redemptions are possible, are there any restrictions?"),
-    ("asset_segregation_issuer", "Based only on the terms of service/legals or other materials provided, does it explicitly state that the underlying reserve assets are segregated from the operating entity?"),
-    ("beneficial_ownership", "Based only on the terms of service/legals, does it explicitly state that the token holders are the beneficial owners of the underlying reserve assets?")
-]
-
-REGULATORY_COVER_QUESTIONS = [
-    ("licenses", "What licenses and from what jurisdiction has the issuing entity obtained? Only include licenses related to the entity which issued the token. If other group entities have licenses, mention them but clarify they are not for the issuing entity. If the token is issued by multiple entities, include all. Highlight if licenses are not relevant. Include a short overview of each license and the issuing jurisdiction."),
-    ("licenses_relevant", "Out of the licenses identified above, which if any specifically relate to the issuance of the type of asset it is (e.g. stablecoin, wrapped token)? List and explain."),
-    ("legal_jurisdiction", "What is the legal jurisdiction of the token's issuing entity? If the issuer is DeFi native, note if there is no definitive jurisdiction."),
-    ("asset_segregation_issuer", "Is there asset segregation from the issuing entity and the reserves? If yes, explain and provide sources. Look for keywords like Trust, segregated accounts, etc. Note if NA for smart contract control."),
-    ("asset_segregation_custodian", "Is there asset segregation from the custodian and the reserves? If yes, explain and provide sources. Look for keywords like Trust, segregated accounts, etc. Note if NA for smart contract control.")
-]
 
 # --- Extraction Logic Update ---
 def run_extraction_for_factor(program: LLMTextCompletionProgram, documents: List[Document], factor_name: str) -> Optional[BaseModel]:
