@@ -8,6 +8,13 @@ from llama_index.llms.openai import OpenAI # Assuming OpenAI is still the target
 from llama_index.core import SimpleDirectoryReader, Document
 from llama_index.core.node_parser import SentenceSplitter
 from dotenv import load_dotenv
+try:
+    from llama_index.readers.web import SimpleWebPageReader
+    WEB_READER_AVAILABLE = True
+except ImportError:
+    WEB_READER_AVAILABLE = False
+    import requests
+    from bs4 import BeautifulSoup
 
 # Ensure logs directory exists
 LOG_DIR = os.path.join(os.path.dirname(__file__), 'logs')
@@ -231,30 +238,42 @@ def load_documents_from_sources(file_paths: Optional[List[str]] = None, urls: Op
         for file_path in file_paths:
             try:
                 logger.info(f"Loading document from file: {file_path}")
-                # SimpleDirectoryReader expects a directory, so we pass the file path as a list to input_files
                 filename = os.path.basename(file_path)
                 reader = SimpleDirectoryReader(input_files=[file_path])
                 docs = reader.load_data()
                 for doc in docs:
                     doc.metadata["source_type"] = "file"
-                    doc.metadata["source_name"] = filename 
+                    doc.metadata["source_name"] = filename
                 documents.extend(docs)
             except Exception as e:
                 logger.error(f"Failed to load document {file_path}: {e}")
-    # URL loading can be added here if needed, using appropriate LlamaIndex loaders
     if urls:
-        logger.warning("URL loading is not fully implemented in this recreated script version.")
-        # Example: from llama_index.readers.web import SimpleWebPageReader
-        # for url in urls:
-        #     try:
-        #         url_docs = SimpleWebPageReader(html_to_text=True).load_data([url])
-        #         for doc in url_docs:
-        #             doc.metadata["source_type"] = "url"
-        #             doc.metadata["source_name"] = url
-        #         documents.extend(url_docs)
-        #     except Exception as e:
-        #         logger.error(f"Failed to load document from URL {url}: {e}")
-
+        if WEB_READER_AVAILABLE:
+            for url in urls:
+                try:
+                    logger.info(f"Loading document from URL: {url}")
+                    url_docs = SimpleWebPageReader(html_to_text=True).load_data([url])
+                    for doc in url_docs:
+                        doc.metadata["source_type"] = "url"
+                        doc.metadata["source_name"] = url
+                    documents.extend(url_docs)
+                except Exception as e:
+                    logger.error(f"Failed to load document from URL {url}: {e}")
+        else:
+            for url in urls:
+                try:
+                    logger.info(f"(Fallback) Loading document from URL: {url}")
+                    resp = requests.get(url, timeout=10)
+                    soup = BeautifulSoup(resp.text, 'html.parser')
+                    text = soup.get_text(separator='\n')
+                    doc = Document(text)
+                    doc.metadata["source_type"] = "url"
+                    doc.metadata["source_name"] = url
+                    documents.append(doc)
+                except Exception as e:
+                    logger.error(f"Failed to load document from URL {url} (fallback): {e}")
+        if not documents:
+            logger.warning("No documents loaded from provided URLs.")
     logger.info(f"Loaded {len(documents)} documents in total.")
     return documents
 
@@ -265,7 +284,7 @@ For each field, provide:
 - The answer itself
 - Supporting context
 - Direct quote(s) from the document(s)
-- Reference(s) (filename, page, line)
+- Reference(s) (use the actual filename or URL, page, line; do NOT use 'context' as a reference)
 - Your reasoning as the agent
 - If not enough information is available, state what is missing or what would help form a conclusion.
 

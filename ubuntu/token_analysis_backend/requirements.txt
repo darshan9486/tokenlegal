@@ -1,7 +1,9 @@
-  fastapi
-  uvicorn
-  pydantic
-  llama-index
-  openai
-  python-multipart
-  python-dotenv
+fastapi
+uvicorn
+pydantic
+llama-index
+openai
+python-multipart
+python-dotenv
+llama-index-readers-web
+beautifulsoup4
